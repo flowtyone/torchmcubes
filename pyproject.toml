@@ -4,7 +4,6 @@ build-backend = "hatchling.build"
 
 [project]
 name = "torchmcubes"
-dynamic = ["version"]
 description = "torchmcubes: marching cubes for PyTorch"
 readme = "README.md"
 license = "MIT"
@@ -16,9 +15,7 @@ classifiers = [
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
 ]
-
-[tool.hatch.version]
-path = "torchmcubes/__init__.py"
+version = "0.1.0"
 
 [tool.hatch.build.targets.sdist]
 include = [

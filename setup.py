@@ -2,19 +2,8 @@ from setuptools import setup
 from torch.utils.cpp_extension import BuildExtension
 
 setup_kwargs = {
-    'name': 'torchmcubes',
-    'version': '0.1.0',
-    'description': 'torchmcubes: marching cubes for PyTorch',
-    'license': 'MIT',
-    'author': 'Tatsuya Yatagawa',
-    'author_email': 'tatsy.mail@gmail.com',
     'packages': [
         'torchmcubes'
-    ],
-    'classifiers': [
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
-        'Programming Language :: Python :: 3.9',
     ]
 }
 

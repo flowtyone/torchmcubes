@@ -48,7 +48,7 @@ def process_wrap(cmd_str, cwd=None, handler=None):
 
     return process.wait()
 
-process_wrap([sys.executable, '-m', 'pip', 'install', 'wheel', 'setuptools', 'torch', 'numpy', 'cuda-python'])
+process_wrap([sys.executable, '-m', 'pip', 'install', 'torch'])
 
 from setuptools import setup
 

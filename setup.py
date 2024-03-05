@@ -52,7 +52,7 @@ except:
 
         return process.wait()
 
-    process_wrap([sys.executable, '-m', 'pip', 'install', 'torch'])
+    process_wrap([sys.executable, '-m', 'pip', 'install', 'torch', 'numpy'])
 
 
 try:

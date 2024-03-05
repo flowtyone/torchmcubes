@@ -1,5 +1,3 @@
-from setuptools import setup
-
 setup_kwargs = {
     'name': 'torchmcubes',
     'version': '0.1.0',
@@ -17,44 +15,42 @@ setup_kwargs = {
     ]
 }
 
-try:
-    import torch
-    import numpy
-except:
-    import subprocess
-    import threading
-    import sys
-    import locale
 
-    def handle_stream(stream, is_stdout):
-        stream.reconfigure(encoding=locale.getpreferredencoding(), errors='replace')
+import subprocess
+import threading
+import sys
+import locale
 
-        for msg in stream:
-            if is_stdout:
-                print(msg, end="", file=sys.stdout)
-            else:
-                print(msg, end="", file=sys.stderr)
+def handle_stream(stream, is_stdout):
+    stream.reconfigure(encoding=locale.getpreferredencoding(), errors='replace')
 
-    def process_wrap(cmd_str, cwd=None, handler=None):
-        print(f"EXECUTE: {cmd_str} in '{cwd}'")
-        process = subprocess.Popen(cmd_str, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, bufsize=1)
+    for msg in stream:
+        if is_stdout:
+            print(msg, end="", file=sys.stdout)
+        else:
+            print(msg, end="", file=sys.stderr)
 
-        if handler is None:
-            handler = handle_stream
+def process_wrap(cmd_str, cwd=None, handler=None):
+    print(f"EXECUTE: {cmd_str} in '{cwd}'")
+    process = subprocess.Popen(cmd_str, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, bufsize=1)
 
-        stdout_thread = threading.Thread(target=handler, args=(process.stdout, True))
-        stderr_thread = threading.Thread(target=handler, args=(process.stderr, False))
+    if handler is None:
+        handler = handle_stream
 
-        stdout_thread.start()
-        stderr_thread.start()
+    stdout_thread = threading.Thread(target=handler, args=(process.stdout, True))
+    stderr_thread = threading.Thread(target=handler, args=(process.stderr, False))
 
-        stdout_thread.join()
-        stderr_thread.join()
+    stdout_thread.start()
+    stderr_thread.start()
 
-        return process.wait()
+    stdout_thread.join()
+    stderr_thread.join()
 
-    process_wrap([sys.executable, '-m', 'pip', 'install', 'torch', 'numpy'])
+    return process.wait()
 
+process_wrap([sys.executable, '-m', 'pip', 'install', 'wheel', 'setuptools', 'torch', 'numpy', 'cuda-python'])
+
+from setuptools import setup
 
 try:
     from torch.utils.cpp_extension import CUDAExtension

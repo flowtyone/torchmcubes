@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling", "torch", "numpy"]
+build-backend = "hatchling.build"
+
+[project]
+name = "torchmcubes"
+description = "torchmcubes: marching cubes for PyTorch"
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "Tatsuya Yatagawa", email = "tatsy.mail@gmail.com" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+]
+version="0.1.0"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/torchmcubes",
+]
